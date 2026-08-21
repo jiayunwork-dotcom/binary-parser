@@ -84,6 +84,7 @@ func (wr *Writer) WriteRecord(rec format.Record) error {
 		}
 	}
 	crcVal := crc32.ChecksumIEEE(rec.Payload)
+	crcVal = applyCRCEncode(crcVal)
 	if err := binary.Write(wr.w, binary.BigEndian, crcVal); err != nil {
 		return err
 	}
