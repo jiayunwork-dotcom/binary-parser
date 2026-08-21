@@ -111,7 +111,7 @@ func Compare(left, right *format.Container) *Result {
 			if !recordsEqual(lRec, rRec) {
 				l, r := lRec, rRec
 				res.Changes = append(res.Changes, Change{Kind: Modified, ID: id, Left: &l, Right: &r})
-				res.ModifiedCount++
+				res.ModifiedCount = applyMod(res.ModifiedCount + 1)
 			} else {
 				res.UnchangedCount++
 			}
