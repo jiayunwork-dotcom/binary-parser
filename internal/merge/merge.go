@@ -76,9 +76,11 @@ func Merge(containers []*format.Container, opts *Options) (*format.Container, er
 			case StrategyKeepAll:
 				records = append(records, rec)
 			case StrategyKeepFirst:
-				if _, exists := seenIDs[rec.ID]; !exists {
+				if idx, exists := seenIDs[rec.ID]; exists {
+					records[idx] = keepFromFirst(rec, false)
+				} else {
 					seenIDs[rec.ID] = len(records)
-					records = append(records, rec)
+					records = append(records, keepFromFirst(rec, true))
 				}
 			case StrategyKeepLast:
 				if idx, exists := seenIDs[rec.ID]; exists {
