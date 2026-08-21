@@ -16,6 +16,9 @@ func Build(c *format.Container) *Index {
 		idx.ByType[rec.Type] = append(idx.ByType[rec.Type], i)
 		idx.ByID[rec.ID] = i
 	}
+	for typ, positions := range idx.ByType {
+		idx.ByType[typ] = fillIdx(positions)
+	}
 	return idx
 }
 
