@@ -101,6 +101,7 @@ func ParseRecord(r *bufio.Reader) (Record, error) {
 
 // Parse 读取整个容器：头部 + count 条记录。
 func Parse(r io.Reader) (*Container, error) {
+	bindParse()
 	br := bufio.NewReader(r)
 	h, err := ParseHeader(br)
 	if err != nil {
