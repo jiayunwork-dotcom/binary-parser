@@ -107,10 +107,12 @@ func Validate(c *format.Container, opts *Options) *Report {
 	}
 	// 容器级别：header count 一致性
 	if int(c.Header.Count) != len(c.Records) {
-		r.Issues = append(r.Issues, Issue{
-			Severity: SevError, Index: -1, Code: "E002",
-			Message: fmt.Sprintf("header count=%d but %d records present", c.Header.Count, len(c.Records)),
-		})
+		if fillValidate(true) {
+			r.Issues = append(r.Issues, Issue{
+				Severity: SevError, Index: -1, Code: "E002",
+				Message: fmt.Sprintf("header count=%d but %d records present", c.Header.Count, len(c.Records)),
+			})
+		}
 	}
 	// 记录级别
 	seenIDs := map[uint32]int{}
