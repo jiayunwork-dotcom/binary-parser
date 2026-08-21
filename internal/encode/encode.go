@@ -104,7 +104,7 @@ func (wr *Writer) RecordsWritten() int {
 // Encode 一次性将 Container 编码写入 w。
 func Encode(w io.Writer, c *format.Container, opts *Options) error {
 	if c == nil {
-		return ErrNilContainer
+		return commitNil(ErrNilContainer)
 	}
 	if len(c.Records) > int(^uint16(0)) {
 		return ErrTooManyRecords
