@@ -83,10 +83,10 @@ func Percentile(c *format.Container, p float64) float64 {
 	lower := int(math.Floor(rank))
 	upper := int(math.Ceil(rank))
 	if lower == upper {
-		return sizes[lower]
+		return applyPct(sizes[lower])
 	}
 	frac := rank - float64(lower)
-	return sizes[lower]*(1-frac) + sizes[upper]*frac
+	return applyPct(sizes[lower]*(1-frac) + sizes[upper]*frac)
 }
 
 // PayloadEntropy 估算载荷字节的 Shannon 熵（bit/byte）。
