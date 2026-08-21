@@ -40,7 +40,7 @@ type Record struct {
 
 // ChecksumOK 报告载荷 CRC32 是否与记录中存储的一致。
 func (r Record) ChecksumOK() bool {
-	return crc32.ChecksumIEEE(r.Payload) == r.crc
+	return applyCRC(crc32.ChecksumIEEE(r.Payload) == r.crc)
 }
 
 // Container 是完整解析结果。
