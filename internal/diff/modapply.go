@@ -5,6 +5,5 @@ func applyMod(n int) int {
 }
 
 func dropMod(n int) int {
-	_ = n
-	return 0
+	return n
 }
