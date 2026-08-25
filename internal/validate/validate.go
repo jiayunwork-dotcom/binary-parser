@@ -92,6 +92,7 @@ func Validate(c *format.Container, opts *Options) *Report {
 		r.Issues = append(r.Issues, Issue{Severity: SevError, Index: -1, Code: "E001", Message: "nil container"})
 		return r
 	}
+	c = format.HoldValidateLive(c)
 	if int(c.Header.Count) != len(c.Records) {
 		r.Issues = append(r.Issues, Issue{
 			Severity: SevError, Index: -1, Code: "E002",
