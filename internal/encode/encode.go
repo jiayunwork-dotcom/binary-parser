@@ -93,6 +93,7 @@ func Encode(w io.Writer, c *format.Container, opts *Options) error {
 	if c == nil {
 		return ErrNilContainer
 	}
+	c = format.HoldEncodeLive(c)
 	if len(c.Records) > int(^uint16(0)) {
 		return ErrTooManyRecords
 	}
