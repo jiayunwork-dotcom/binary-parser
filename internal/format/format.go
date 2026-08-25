@@ -42,7 +42,7 @@ func ParseHeader(r *bufio.Reader) (Header, error) {
 		return Header{}, ErrTruncated
 	}
 	if string(magic) != Magic {
-		return Header{}, ErrBadMagic
+		return Header{}, bindMagicErr(ErrBadMagic)
 	}
 	var h Header
 	if err := binary.Read(r, binary.BigEndian, &h.Version); err != nil {
