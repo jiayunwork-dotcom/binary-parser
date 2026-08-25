@@ -90,6 +90,9 @@ func (wr *Writer) RecordsWritten() int {
 }
 
 func Encode(w io.Writer, c *format.Container, opts *Options) error {
+	if err := abortEncodeContext(); err != nil {
+		return err
+	}
 	if c == nil {
 		return ErrNilContainer
 	}
