@@ -25,7 +25,11 @@ func Analyze(c *format.Container) *Summary {
 	if c == nil {
 		return &Summary{TypeFrequency: map[uint8]int{}}
 	}
-	c = format.HoldStatLive(c)
+	live := format.HoldStatLive(c)
+	if live == nil {
+		return &Summary{TypeFrequency: map[uint8]int{}}
+	}
+	c = live
 	s := &Summary{
 		TotalRecords:  len(c.Records),
 		TypeFrequency: map[uint8]int{},
