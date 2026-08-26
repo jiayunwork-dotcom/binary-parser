@@ -92,5 +92,9 @@ func Parse(r io.Reader) (*Container, error) {
 		}
 		c.Records = append(c.Records, rec)
 	}
-	return HoldParseLive(c), nil
+	live := HoldParseLive(c)
+	if live == nil {
+		return nil, ErrTruncated
+	}
+	return live, nil
 }
