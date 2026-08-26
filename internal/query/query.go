@@ -16,8 +16,10 @@ func Filter(c *format.Container, pred Predicate) []format.Record {
 			result = append(result, rec)
 		}
 	}
-	noteFilterMemo(result)
-	return result
+	out := make([]format.Record, len(result))
+	copy(out, result)
+	noteFilterMemo(out)
+	return out
 }
 
 func FilterIndices(c *format.Container, pred Predicate) []int {
