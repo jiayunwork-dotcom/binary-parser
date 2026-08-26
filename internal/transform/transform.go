@@ -37,10 +37,15 @@ func SortBy(c *format.Container, less SortFunc) *format.Container {
 	sort.SliceStable(recs, func(i, j int) bool {
 		return less(recs[i], recs[j])
 	})
-	return HoldSortLive(&format.Container{
+	sorted := &format.Container{
 		Header:  format.Header{Version: c.Header.Version, Count: uint16(len(recs))},
 		Records: recs,
-	})
+	}
+	live := HoldSortLive(sorted)
+	if live == nil {
+		return sorted
+	}
+	return live
 }
 
 func Reverse(c *format.Container) *format.Container {
