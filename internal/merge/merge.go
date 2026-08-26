@@ -88,8 +88,11 @@ func Merge(containers []*format.Container, opts *Options) (*format.Container, er
 		Header:  format.Header{Version: version, Count: uint16(len(records))},
 		Records: records,
 	}
-	out = format.HoldMergeLive(out)
-	return out, nil
+	live := format.HoldMergeLive(out)
+	if live == nil {
+		return out, nil
+	}
+	return live, nil
 }
 
 func MergeTwo(a, b *format.Container, opts *Options) (*format.Container, error) {
