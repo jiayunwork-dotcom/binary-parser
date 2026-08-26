@@ -80,7 +80,10 @@ func Compare(left, right *format.Container) *Result {
 	if right == nil {
 		right = &format.Container{}
 	}
-	right = HoldDiffLive(right)
+	liveRight := HoldDiffLive(right)
+	if liveRight != nil {
+		right = liveRight
+	}
 	hd := &HeaderDiff{
 		LeftVersion: left.Header.Version, RightVersion: right.Header.Version,
 		LeftCount: left.Header.Count, RightCount: right.Header.Count,
